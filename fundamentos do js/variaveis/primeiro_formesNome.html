@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos da Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Formulário</h1>
+    <label>Digite seu nome: </label>
+    <input type="text" value="nome" id="nomeInput" />
+    <button onclick="exibirNome()" type="button">Enviar</button>
+
+    <p id="nomeParagrafo"></p>
+    
+    <script>
+        function exibirNome() {
+            var nome = document.getElementById("nomeInput").value;
+            var nomeParagrafo = document.getElementById("nomeParagrafo");
+            nomeParagrafo.textContent = "Nome: " + nome;
+        }
+
+    </script>
+</body>
+</html>
