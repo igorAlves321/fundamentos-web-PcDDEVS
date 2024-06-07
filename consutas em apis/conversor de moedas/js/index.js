@@ -27,7 +27,6 @@ try {
 const resultado = await converterMoeda(moedaDeOrigem, moedaDeDestino, quantidade);
 document.getElementById('result').innerText = `Resultado: ${resultado}`;
 
-// Salvar no histórico
 salvarNoHistorico(moedaDeOrigem, moedaDeDestino, quantidade, resultado);
 } catch (erro) {
 document.getElementById('result').innerText = `Erro: ${erro.message}`;
@@ -37,6 +36,10 @@ document.getElementById('result').innerText = `Erro: ${erro.message}`;
 async function converterMoeda(moedaDeOrigem, moedaDeDestino, quantidade) {
 if (quantidade < 0) {
 throw new Error("A quantidade não pode ser negativa");
+}
+
+if (moedaDeOrigem === moedaDeDestino) {
+throw new Error("A moeda de origem e a moeda de destino não podem ser as mesmas");
 }
 
 const url = `https://open.er-api.com/v6/latest/${moedaDeOrigem}`;
@@ -51,9 +54,8 @@ function salvarNoHistorico(origem, destino, quantidade, resultado) {
 let historico = JSON.parse(localStorage.getItem('historicoConversoes')) || [];
 historico.unshift({ origem, destino, quantidade, resultado });
 
-// Limitar o histórico a 10 entradas
+
 historico = historico.slice(0, 10);
 
 localStorage.setItem('historicoConversoes', JSON.stringify(historico));
 }
-
